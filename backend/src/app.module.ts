@@ -12,6 +12,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       driver: ApolloDriver,
       autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
+      playground: true,
     }),
     PostsModule,
   ],
