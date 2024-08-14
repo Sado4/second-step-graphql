@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "nest start",
-    "start:dev": "nest start --watch"
+    "start:dev": "prisma generate && nest start --watch"
   },
   "dependencies": {
     "@apollo/server": "^4.11.0",
@@ -9,7 +9,17 @@
     "@nestjs/cli": "^10.4.4",
     "@nestjs/graphql": "^12.2.0",
     "@nestjs/platform-express": "^10.4.1",
+    "@prisma/client": "^5.18.0",
     "apollo-server-express": "^3.13.0",
     "graphql": "^16.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.3.0",
+    "prisma": "^5.18.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }
