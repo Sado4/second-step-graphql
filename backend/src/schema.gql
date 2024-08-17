@@ -8,5 +8,6 @@ type PostModel {
 }
 
 type Query {
+  hello: Int!
   posts: [PostModel!]
 }
