@@ -16,6 +16,12 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "../src/graphql/posts.query.gql",
+    "graphql/posts.query.gql"
+  ],
   "exclude": ["node_modules"]
 }
