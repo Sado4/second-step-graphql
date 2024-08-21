@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.11.0",
+    "@google-cloud/logging-winston": "^6.0.0",
     "@nestjs/apollo": "^12.2.0",
     "@nestjs/cli": "^10.4.4",
     "@nestjs/config": "^3.2.3",
@@ -14,7 +15,9 @@
     "apollo-server-express": "^3.13.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
-    "graphql": "^16.9.0"
+    "graphql": "^16.9.0",
+    "nest-winston": "^1.9.7",
+    "winston": "^3.14.2"
   },
   "devDependencies": {
     "@types/node": "^22.3.0",

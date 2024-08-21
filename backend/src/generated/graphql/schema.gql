@@ -11,4 +11,5 @@ type Query {
   hello: Int!
   helloEnvDbUrl: String!
   posts: [PostModel!]
+  prismaPosts: [PostModel!]
 }
