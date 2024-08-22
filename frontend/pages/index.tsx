@@ -2,19 +2,13 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import { GetServerSideProps } from "next";
 import { urqlClient } from "@/libs/gql-requests";
-import { PostIndexPageDocument } from "@/graphql/generated.graphql.ts/graphql";
+import { PostFragment, PostIndexPageDocument } from "@/graphql/generated.graphql.ts/graphql";
 
 const inter = Inter({ subsets: ["latin"] });
 
-type Post = {
-  id: string;
-  title: string;
-  type: string;
-  publishDate?: any | null;
-};
-
 type Props = {
-  posts: Post[] | null | undefined;
+  articles: PostFragment[];
+  diaries: PostFragment[];
 };
 
 export default function Home(props: Props) {
@@ -24,7 +18,16 @@ export default function Home(props: Props) {
     >
       <h1>Hello GraphQL</h1>
       <ul>
-        {props?.posts?.map((post) => (
+        articles:
+        {props?.articles?.map((post) => (
+          <li key={post.id}>
+            id: {post.id} title: {post.title} type: {post.type} publishDate:{post.publishDate}
+          </li>
+        ))}
+      </ul>
+      <ul>
+        diaries:
+        {props?.diaries?.map((post) => (
           <li key={post.id}>
             id: {post.id} title: {post.title} type: {post.type} publishDate:{post.publishDate}
           </li>
@@ -139,18 +142,17 @@ export default function Home(props: Props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   try {
 
     const client = await urqlClient();
 
     const result = await client.query(PostIndexPageDocument, {}).toPromise();
 
-    console.log(result.data);
-
     return {
       props: {
-        posts: result?.data?.posts,
+        articles: result?.data?.articles,
+        diaries: result?.data?.diaries,
       },
     };
   } catch (e) {

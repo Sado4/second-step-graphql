@@ -45,10 +45,18 @@ export type QueryPostsArgs = {
   type?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
+export type PostFragment = { __typename?: 'PostModel', id: string, title: string, type: string, publishDate?: any | null } & { ' $fragmentName'?: 'PostFragment' };
+
 export type PostIndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PostIndexPageQuery = { __typename?: 'Query', posts?: Array<{ __typename?: 'PostModel', id: string, title: string, type: string, publishDate?: any | null }> | null };
+export type PostIndexPageQuery = { __typename?: 'Query', articles?: Array<(
+    { __typename?: 'PostModel' }
+    & { ' $fragmentRefs'?: { 'PostFragment': PostFragment } }
+  )> | null, diaries?: Array<(
+    { __typename?: 'PostModel' }
+    & { ' $fragmentRefs'?: { 'PostFragment': PostFragment } }
+  )> | null };
 
-
-export const PostIndexPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PostIndexPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"publishDate"}}]}}]}}]} as unknown as DocumentNode<PostIndexPageQuery, PostIndexPageQueryVariables>;
+export const PostFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Post"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PostModel"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"publishDate"}}]}}]} as unknown as DocumentNode<PostFragment, unknown>;
+export const PostIndexPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PostIndexPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"articles"},"name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"type"},"value":{"kind":"ListValue","values":[{"kind":"StringValue","value":"article","block":false}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Post"}}]}},{"kind":"Field","alias":{"kind":"Name","value":"diaries"},"name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"type"},"value":{"kind":"ListValue","values":[{"kind":"StringValue","value":"diary","block":false}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Post"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Post"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PostModel"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"publishDate"}}]}}]} as unknown as DocumentNode<PostIndexPageQuery, PostIndexPageQueryVariables>;

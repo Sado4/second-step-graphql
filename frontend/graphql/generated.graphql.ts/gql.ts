@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query PostIndexPage {\n  posts {\n    id\n    title\n    type\n    publishDate\n  }\n}": types.PostIndexPageDocument,
+    "fragment Post on PostModel {\n  id\n  title\n  type\n  publishDate\n}\n\nquery PostIndexPage {\n  articles: posts(type: [\"article\"]) {\n    ...Post\n  }\n  diaries: posts(type: [\"diary\"]) {\n    ...Post\n  }\n}": types.PostFragmentDoc,
 };
 
 /**
@@ -33,7 +33,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query PostIndexPage {\n  posts {\n    id\n    title\n    type\n    publishDate\n  }\n}"): (typeof documents)["query PostIndexPage {\n  posts {\n    id\n    title\n    type\n    publishDate\n  }\n}"];
+export function graphql(source: "fragment Post on PostModel {\n  id\n  title\n  type\n  publishDate\n}\n\nquery PostIndexPage {\n  articles: posts(type: [\"article\"]) {\n    ...Post\n  }\n  diaries: posts(type: [\"diary\"]) {\n    ...Post\n  }\n}"): (typeof documents)["fragment Post on PostModel {\n  id\n  title\n  type\n  publishDate\n}\n\nquery PostIndexPage {\n  articles: posts(type: [\"article\"]) {\n    ...Post\n  }\n  diaries: posts(type: [\"diary\"]) {\n    ...Post\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
